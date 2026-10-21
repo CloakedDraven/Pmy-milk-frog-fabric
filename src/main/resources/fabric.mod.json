@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "pmymilkfrog",
+	"version":"${version}",
+	"name": "Pmy's Milkfrog",
+	"description": "Welcome to Pmy's Milkfrog Mod!\n\nThis mod adds:\n- The MilkSnail: a new creature that can eat lollipops and laugh\n- The Lollipop: a delicious new food item\n\nHave fun!",
+	"authors": [
+		"PmyTrio"
+	],
+	"contact": {
+		"homepage": "https://github.com/CloakedDraven/Pmy-milk-frog-fabric",
+		"sources": "https://github.com/CloakedDraven/Pmy-milk-frog-fabric"
+	},
+	"license": "MIT",
+	"icon": "assets/pmymilkfrog/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.pmytrio.milkfrog.PmySMilkfrog"
+		],
+		"client": [
+			"com.pmytrio.milkfrog.client.PmySMilkfrogClient"
+		],
+		"fabric-datagen": [
+			"com.pmytrio.milkfrog.client.PmySMilkfrogDataGenerator"
+		]
+	},
+	"mixins": [
+		"pmymilkfrog.mixins.json",
+		{
+			"config": "pmymilkfrog.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*",
+		"geckolib": ">=5.5.1"
+	}
+}
