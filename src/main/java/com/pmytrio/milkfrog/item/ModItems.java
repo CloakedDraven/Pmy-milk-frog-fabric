@@ -1,5 +1,7 @@
-package com.pmytrio.milkfrog;
+package com.pmytrio.milkfrog.item;
 
+import com.pmytrio.milkfrog.PmySMilkfrog;
+import com.pmytrio.milkfrog.blocks.ModBlocks;
 import com.pmytrio.milkfrog.entity.ModEntityTypes;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
@@ -23,9 +25,18 @@ public class ModItems {
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)
                 .register((creativeTab) -> creativeTab.accept(ModItems.LOLLIPOP));
 
+        //milk_dust
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
+                .register((creativeTab) -> creativeTab.accept(ModItems.MILK_DUST));
+
         //milksnail_spawn_egg
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS)
                 .register((creativeTab) -> creativeTab.accept(ModItems.MILKSNAIL_SPAWN_EGG));
+
+        //milk_block.json
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((creativeTab) -> {
+            creativeTab.accept(ModBlocks.MILK_BLOCK.asItem());
+        });
     }
 
 
@@ -40,6 +51,12 @@ public class ModItems {
                         .alwaysEdible()
                         .build()
             )
+    );
+
+    public static final Item MILK_DUST = register(
+            "milk_dust",
+            Item::new,
+            new Item.Properties()
     );
 
     public static final Item MILKSNAIL_SPAWN_EGG = register(

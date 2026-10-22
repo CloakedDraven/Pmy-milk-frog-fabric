@@ -25,15 +25,16 @@ This mod introduces Milk Snails, a new creature, along with two items: Lollipops
 - Not tested with other mods yet. Report conflicts via Issues.
 
 ### Usage
-- Craft the Lollipop:
-  ![Lollipop recipe](docs/recipe_lollipop.png)
+- Craft the Lollipop and Milk Block:
+- ![Lollipop recipe](docs/recipe_lollipop.png)
+  ![Milk Block recipe](docs/recipe_milk_block.png)
+- You can get Milk Dust by defeating Milk Snails.
 - Use the Milk Snail Spawn Egg to spawn a Milk Snail.
+- Feed Lollipops on two adult Milk Snails to breed them.
 - Milk Snail animations/textures are currently buggy.
 
 ### About
 This is my first Minecraft mod, developed with AI assistance. I also use AI to help me learn how to build projects. The mod is currently in **Alpha**, so it may have bugs and unfinished features. If anyone has advice on how to improve the mod, I would really appreciate it.
-- Implemented: crafting system, the Lollipop item (texture & use), the Milk Snail mob (behavior & spawn egg)
-- Known issues: Milk Snail animation/texture glitches
 
 ### Credits
 - **Author** : CloakedDraven
@@ -65,14 +66,15 @@ This is my first Minecraft mod, developed with AI assistance. I also use AI to h
 
 ### 使用
 - 合成棒棒糖：
-  ![棒棒糖合成表](docs/recipe_lollipop_zh_cn.png)
+- ![棒棒糖合成表](docs/recipe_lollipop_zh_cn.png)
+  ![奶快](docs/recipe_milk_block_zh_cn.png)
+- 你可以击败奶蜗来获得奶粉。
 - 使用奶蜗生成蛋生成奶蜗。
+- 奶蜗可以使用棒棒糖让他们繁殖。
 - 奶蜗的动画和贴图目前存在 bug。
 
 ### 关于
 这是我的第一个 Minecraft Mod，在 AI 辅助下完成，我也借助 AI 学习如何搭建项目。目前 Mod 处于 **Alpha** 阶段，可能存在 bug 和未完成的功能。如果有人愿意指导我如何改进，我会非常感激。
-- 已实现：合成系统、棒棒糖物品（贴图与使用）、奶蜗生物（机制与生成蛋）
-- 已知问题：奶蜗动画/贴图异常
 
 ### 鸣谢
 - **作者** : CloakedDraven

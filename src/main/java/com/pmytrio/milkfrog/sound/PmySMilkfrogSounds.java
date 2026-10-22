@@ -1,4 +1,4 @@
-package com.pmytrio.milkfrog;
+package com.pmytrio.milkfrog.sound;
 
 import net.fabricmc.api.ModInitializer;
 

@@ -1,6 +1,5 @@
-package com.pmytrio.milkfrog;
+package com.pmytrio.milkfrog.entity;
 
-import com.pmytrio.milkfrog.entity.ModEntityTypes;
 import net.fabricmc.api.ModInitializer;
 
 public class PmySMilkfrogEntity implements ModInitializer {

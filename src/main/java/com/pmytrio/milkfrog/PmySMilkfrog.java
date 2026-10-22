@@ -2,9 +2,11 @@ package com.pmytrio.milkfrog;
 
 import com.pmytrio.milkfrog.entity.ModEntitySpawns;
 import com.pmytrio.milkfrog.entity.ModEntityTypes;
+import com.pmytrio.milkfrog.blocks.ModBlocks;
+import com.pmytrio.milkfrog.item.ModItems;
+import com.pmytrio.milkfrog.sound.CustomSounds;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization;
 import net.minecraft.resources.Identifier;
 
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ public class PmySMilkfrog implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItems.initialize();
+		ModBlocks.initialize();
 		ModEntityTypes.registerModEntityTypes();
 		ModEntityTypes.registerAttributes();
 		ModEntitySpawns.registerSpawns();
