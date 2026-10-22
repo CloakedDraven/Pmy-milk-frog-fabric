@@ -23,23 +23,51 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import org.jspecify.annotations.NonNull;
 
 public class MilksnailEntity extends Animal implements GeoEntity {
-    private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-    private int laughTicks = 0;
+    /** ----------Constants---------- **/
+
     private static final int LAUGH_DURATION = 80;
+
+    /** ----------State Fields---------- **/
+
+    //----------Geckolib Animation Cathe----------
+    private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+    //----------Laughter Control Parameters----------
+    private int laughTicks = 0;
     private boolean isLaughing = false;
 
 
+
+    /** ----------Constructor---------- **/
     public MilksnailEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
-    public boolean isBreedingOnCooldown() {
-        return this.getAge() > 0;
+
+
+    /** ----------Attributes---------- **/
+
+    public static AttributeSupplier.Builder createMilksnailAttributes() {
+        return PathfinderMob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 5)
+                .add(Attributes.TEMPT_RANGE, 10)
+                .add(Attributes.MOVEMENT_SPEED, 0.5);
     }
 
+
+
+    /** ----------GeckoLib animations---------- **/
+
+    @NonNull
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.geoCache;
+    }
+
+    // Registers the animation controller: play "walk" while moving, "idle" otherwise.
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(state -> {
@@ -50,44 +78,39 @@ public class MilksnailEntity extends Animal implements GeoEntity {
         }));
     }
 
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.geoCache;
-    }
 
-    public static AttributeSupplier.Builder createMilksnailAttributes() {
-        return PathfinderMob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 5)
-                .add(Attributes.TEMPT_RANGE, 10)
-                .add(Attributes.MOVEMENT_SPEED, 0.5);
-    }
+
+    /** ----------AI goals---------- **/
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
-
-        // 添加繁殖 AI，优先级放在 TemptGoal 之前（数值越小优先级越高）
-        this.goalSelector.addGoal(2, new BreedGoal(this, 0.5D));
-
-        this.goalSelector.addGoal(3, new TemptGoal(this, 0.5, Ingredient.of(ModItems.LOLLIPOP), false));
-        this.goalSelector.addGoal(4, new RandomStrollGoal(this, 0.5));
-        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 4));
-        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this));// float in water
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));// panic/flee
+        this.goalSelector.addGoal(2, new BreedGoal(this, 0.5D));// breed
+        this.goalSelector.addGoal(3, new TemptGoal(this, 0.5, Ingredient.of(ModItems.LOLLIPOP), false));// tempted by lollipop
+        this.goalSelector.addGoal(4, new RandomStrollGoal(this, 0.5));// random strolling
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 4));// look at nearby players
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));// random looking around
     }
 
+
+    /** ----------Per-tick logic---------- **/
     @Override
     public void tick() {
         super.tick();
+
         if (!this.level().isClientSide() && this.isLaughing) {
             this.getNavigation().stop();
 
             if (--this.laughTicks <= 0) {
                 this.stopLaughing();
             }
+            }
         }
-    }
 
+
+
+    /** ---------Laugh state---------- **/
 
     public void startLaughing() {
         this.isLaughing = true;
@@ -106,6 +129,48 @@ public class MilksnailEntity extends Animal implements GeoEntity {
     public boolean isLaughing() {
         return this.isLaughing;
     }
+
+
+
+    /** ----------Breeding---------- **/
+
+    public boolean isBreedingOnCooldown() {
+        return this.getAge() > 0;
+    }
+
+    @Override
+    public boolean isFood(ItemStack stack) {
+        return stack.is(ModItems.LOLLIPOP);
+    }
+
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
+        // Generate a chick temporarily.
+        return ModEntityTypes.MILKSNAIL.create(level, net.minecraft.world.entity.EntitySpawnReason.BREEDING);
+    }
+
+    @Override
+    public void spawnChildFromBreeding(ServerLevel level, Animal partner) {
+        super.spawnChildFromBreeding(level, partner);
+
+        for (int i = 0; i < 10; ++i) {
+            double x = this.getX() + (this.random.nextDouble() * 2.0D - 1.0D) * 5.0D;
+            double y = this.getY();
+            double z = this.getZ() + (this.random.nextDouble() * 2.0D - 1.0D) * 5.0D;
+
+            this.getNavigation().moveTo(x, y, z, 0.5D);
+
+            double pX = partner.getX() + (this.random.nextDouble() * 2.0D - 1.0D) * 5.0D;
+            double pY = partner.getY();
+            double pZ = partner.getZ() + (this.random.nextDouble() * 2.0D - 1.0D) * 5.0D;
+            partner.getNavigation().moveTo(pX, pY, pZ, 0.5D);
+
+        }
+    }
+
+
+
+    /** ----------Player interaction---------- **/
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -156,41 +221,5 @@ public class MilksnailEntity extends Animal implements GeoEntity {
 
         return super.mobInteract(player, hand);
     }
-
-    @Override
-    public boolean isFood(ItemStack stack) {
-        return stack.is(ModItems.LOLLIPOP);
-    }
-
-    @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
-        // Generate a chick temporarily.
-        return net.minecraft.world.entity.EntityType.CHICKEN.create(level, net.minecraft.world.entity.EntitySpawnReason.BREEDING);
-    }
-
-    @Override
-    public void spawnChildFromBreeding(ServerLevel level, Animal partner) {
-        super.spawnChildFromBreeding(level, partner);
-
-        this.stopLaughing();
-        if (partner instanceof MilksnailEntity milksnailPartner) {
-            milksnailPartner.stopLaughing();
-        }
-
-        for (int i = 0; i < 10; ++i) {
-            double x = this.getX() + (this.random.nextDouble() * 2.0D - 1.0D) * 5.0D;
-            double y = this.getY();
-            double z = this.getZ() + (this.random.nextDouble() * 2.0D - 1.0D) * 5.0D;
-
-            this.getNavigation().moveTo(x, y, z, 0.5D);
-
-            double pX = partner.getX() + (this.random.nextDouble() * 2.0D - 1.0D) * 5.0D;
-            double pY = partner.getY();
-            double pZ = partner.getZ() + (this.random.nextDouble() * 2.0D - 1.0D) * 5.0D;
-            partner.getNavigation().moveTo(pX, pY, pZ, 0.5D);
-
-        }
-    }
-
 }
 
