@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "pmymilkfrog:milk_block"
+          "name": "pmymilkfrog:yellow_peach_block"
         }
       ],
       "conditions": [

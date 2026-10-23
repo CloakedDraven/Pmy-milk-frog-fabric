@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "pmymilkfrog:block/milk_block"
+    "all": "pmymilkfrog:block/yellow_peach_block"
   }
 }

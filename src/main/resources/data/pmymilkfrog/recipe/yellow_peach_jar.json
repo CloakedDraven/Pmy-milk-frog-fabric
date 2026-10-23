@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "pmymilkfrog:glass_jar",
+    "pmymilkfrog:yellow_peach",
+    "minecraft:sugar"
+  ],
+  "result": {
+    "id": "pmymilkfrog:yellow_peach_jar",
+    "count": 1
+  }
+}

@@ -9,7 +9,7 @@
 ---
 ## English
 ### Overview
-This mod introduces Milk Snails, a new creature, along with two items: Lollipops and Milk Snail Spawn Eggs. You can eat Lollipops or feed them to Milk Snails. If a Milk Snail eats a Lollipop, it will burst into laughter. In the future, I will add more creatures, including milk frogs and other interesting content.
+This mod introduces Milk Snails, a new creature, along with more items, such as Lollipops and Milk Snail Spawn Eggs. You can eat Lollipops or feed them to Milk Snails. If a Milk Snail eats a Lollipop, it will burst into laughter. In the future, I will add more creatures, including milk frogs and other interesting content.
 
 ### Requirements
 - **Loader** : Fabric
@@ -25,10 +25,8 @@ This mod introduces Milk Snails, a new creature, along with two items: Lollipops
 - Not tested with other mods yet. Report conflicts via Issues.
 
 ### Usage
-- Craft the Lollipop and Milk Block:
-- ![Lollipop recipe](docs/recipe_lollipop.png)
-  ![Milk Block recipe](docs/recipe_milk_block.png)
-- You can get Milk Dust by defeating Milk Snails.
+- Craft the Lollipop, Yellow Peach Block, Glass Jar, and Yellow Peach Jar.See the docs folder for the specific crafting method.
+- You can get Yellow Peaches by defeating Milk Snails.
 - Use the Milk Snail Spawn Egg to spawn a Milk Snail.
 - Feed Lollipops on two adult Milk Snails to breed them.
 - Milk Snail animations/textures are currently buggy.
@@ -38,7 +36,7 @@ This is my first Minecraft mod, developed with AI assistance. I also use AI to h
 
 ### Credits
 - **Author** : CloakedDraven
-- **Co-Authors** : Penguin Lts, Mouse Csq
+- **Co-Authors** : Penguin Lts, Mouse Csq, Reisen
 - **License** : MIT
 
 ### Links
@@ -49,7 +47,7 @@ This is my first Minecraft mod, developed with AI assistance. I also use AI to h
 ---
 ## 简体中文
 ### 简介
-本 Mod 添加了一种新生物——奶蜗，以及两种物品：棒棒糖和奶蜗生成蛋。你可以吃掉棒棒糖，也可以把它喂给奶蜗。奶蜗吃掉棒棒糖后会大笑。未来我会加入像奶蛙一类的生物和其他有意思的内容。
+本 Mod 添加了一种新生物——奶蜗，以及另外一些物品，比如棒棒糖和奶蜗生成蛋。你可以吃掉棒棒糖，也可以把它喂给奶蜗。奶蜗吃掉棒棒糖后会大笑。未来我会加入像奶蛙一类的生物和其他有意思的内容。
 
 ### 前置要求
 - **加载器** : Fabric
@@ -65,10 +63,8 @@ This is my first Minecraft mod, developed with AI assistance. I also use AI to h
 - 尚未与其他 Mod 进行兼容性测试。如遇冲突请提交 Issue。
 
 ### 使用
-- 合成棒棒糖：
-- ![棒棒糖合成表](docs/recipe_lollipop_zh_cn.png)
-  ![奶快](docs/recipe_milk_block_zh_cn.png)
-- 你可以击败奶蜗来获得奶粉。
+- 可以用工作台合成棒棒糖、黄桃块，玻璃罐，黄桃罐头。具体合成方法看docs文件夹。
+- 你可以击败奶蜗来获得黄桃。
 - 使用奶蜗生成蛋生成奶蜗。
 - 奶蜗可以使用棒棒糖让他们繁殖。
 - 奶蜗的动画和贴图目前存在 bug。
@@ -78,7 +74,7 @@ This is my first Minecraft mod, developed with AI assistance. I also use AI to h
 
 ### 鸣谢
 - **作者** : CloakedDraven
-- **共同作者** : Penguin Lts、Mouse Csq
+- **共同作者** : Penguin Lts、Mouse Csq、Reisen
 - **许可证** : MIT
 
 ### 相关链接

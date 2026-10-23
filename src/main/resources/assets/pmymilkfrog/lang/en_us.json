@@ -1,8 +1,10 @@
 {
   "item.pmymilkfrog.lollipop": "Lollipop",
+  "item.pmymilkfrog.glass_jar": "Glass Jar",
+  "item.pmymilkfrog.yellow_peach_jar": "Yellow Peach Jar",
   "item.pmymilkfrog.milksnail_spawn_egg": "Milk Snail Spawn Egg",
-  "item.pmymilkfrog.milk_dust": "Milk Dust",
+  "item.pmymilkfrog.yellow_peach": "Yellow Peach",
   "entity.pmymilkfrog.milksnail": "Milk Snail",
   "subtitles.pmymilkfrog.short_crazy_laughter": "Short Crazy Laughter",
-  "block.pmymilkfrog.milk_block": "Milk Block"
+  "block.pmymilkfrog.yellow_peach_block": "Yellow Peach Block"
 }

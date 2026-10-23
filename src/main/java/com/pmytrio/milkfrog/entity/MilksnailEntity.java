@@ -5,6 +5,7 @@ import com.geckolib.animatable.instance.AnimatableInstanceCache;
 import com.geckolib.animatable.manager.AnimatableManager;
 import com.geckolib.animation.AnimationController;
 import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.object.PlayState;
 import com.geckolib.util.GeckoLibUtil;
 import com.pmytrio.milkfrog.sound.CustomSounds;
 import com.pmytrio.milkfrog.item.ModItems;
@@ -27,11 +28,15 @@ import org.jspecify.annotations.NonNull;
 
 public class MilksnailEntity extends Animal implements GeoEntity {
 
-    /** ----------Constants---------- **/
+    /**
+     * ----------Constants----------
+     **/
 
     private static final int LAUGH_DURATION = 80;
 
-    /** ----------State Fields---------- **/
+    /**
+     * ----------State Fields----------
+     **/
 
     //----------Geckolib Animation Cathe----------
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
@@ -40,15 +45,17 @@ public class MilksnailEntity extends Animal implements GeoEntity {
     private boolean isLaughing = false;
 
 
-
-    /** ----------Constructor---------- **/
+    /**
+     * ----------Constructor----------
+     **/
     public MilksnailEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
 
-
-    /** ----------Attributes---------- **/
+    /**
+     * ----------Attributes----------
+     **/
 
     public static AttributeSupplier.Builder createMilksnailAttributes() {
         return PathfinderMob.createMobAttributes()
@@ -58,8 +65,9 @@ public class MilksnailEntity extends Animal implements GeoEntity {
     }
 
 
-
-    /** ----------GeckoLib animations---------- **/
+    /**
+     * ----------GeckoLib animations----------
+     **/
 
     @NonNull
     @Override
@@ -70,31 +78,47 @@ public class MilksnailEntity extends Animal implements GeoEntity {
     // Registers the animation controller: play "walk" while moving, "idle" otherwise.
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+
         controllers.add(new AnimationController<>(state -> {
+            if ( this.getHealth() < 2.0F) {
+                return state.setAndContinue(RawAnimation.begin().thenPlayAndHold("intoshell"));
+            }
+            return PlayState.STOP;
+        }));
+
+        controllers.add(new AnimationController<>(state -> {
+
             if (state.isMoving()) {
                 return state.setAndContinue(RawAnimation.begin().thenLoop("walk"));
             }
             return state.setAndContinue(RawAnimation.begin().thenLoop("idle"));
         }));
+
+
+
     }
 
 
-
-    /** ----------AI goals---------- **/
+    /**
+     * ----------AI goals----------
+     **/
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));// float in water
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));// panic/flee
-        this.goalSelector.addGoal(2, new BreedGoal(this, 0.5D));// breed
-        this.goalSelector.addGoal(3, new TemptGoal(this, 0.5, Ingredient.of(ModItems.LOLLIPOP), false));// tempted by lollipop
-        this.goalSelector.addGoal(4, new RandomStrollGoal(this, 0.5));// random strolling
-        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 4));// look at nearby players
-        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));// random looking around
+        this.goalSelector.addGoal(1, new LowHealthFreezeGoal(this));
+        this.goalSelector.addGoal(2, new PanicGoal(this, 1.25D));// panic/flee
+        this.goalSelector.addGoal(3, new BreedGoal(this, 0.5D));// breed
+        this.goalSelector.addGoal(4, new TemptGoal(this, 0.5, Ingredient.of(ModItems.LOLLIPOP), false));// tempted by lollipop
+        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 0.5));// random strolling
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 4));// look at nearby players
+        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));// random looking around
     }
 
 
-    /** ----------Per-tick logic---------- **/
+    /**
+     * ----------Per-tick logic----------
+     **/
     @Override
     public void tick() {
         super.tick();
@@ -105,8 +129,8 @@ public class MilksnailEntity extends Animal implements GeoEntity {
             if (--this.laughTicks <= 0) {
                 this.stopLaughing();
             }
-            }
         }
+    }
 
 
 

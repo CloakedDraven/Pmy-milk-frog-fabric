@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import java.util.function.Function;
 
 public class ModBlocks {
-    public static final Block MILK_BLOCK = register(
-            "milk_block",
+    public static final Block YELLOW_PEACH_BLOCK = register(
+            "yellow_peach_block",
             Block::new,
             BlockBehaviour.Properties.of().sound(SoundType.GRASS)
                     .strength(1.5f),

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "pmymilkfrog:item/milk_dust"
+    "layer0": "pmymilkfrog:item/yellow_peach_jar"
   }
 }
