@@ -20,36 +20,9 @@ import java.util.function.Function;
 
 public class ModItems {
 
-    public static void initialize() {
+    /** ----------Initialize---------- **/
+    public static void Initialize(){
 
-        /** ----------Food and Drinks---------- **/
-        //lollipop
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)
-                .register((creativeTab) -> creativeTab.accept(ModItems.LOLLIPOP));
-
-        //yellow_peach
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)
-                .register((creativeTab) -> creativeTab.accept(ModItems.YELLOW_PEACH));
-
-        //yellow_peach_jar
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)
-                .register((creativeTab) -> creativeTab.accept(ModItems.YELLOW_PEACH_JAR));
-
-        /** ----------Ingredients---------- **/
-        //yellow_peach_jar
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
-                .register((creativeTab) -> creativeTab.accept(ModItems.GLASS_JAR));
-
-        /** ----------Spawn Egg---------- **/
-        //milksnail_spawn_egg
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS)
-                .register((creativeTab) -> creativeTab.accept(ModItems.MILKSNAIL_SPAWN_EGG));
-
-        /** ----------Block---------- **/
-        //yellow_peach_block.json
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register((creativeTab) -> {
-            creativeTab.accept(ModBlocks.YELLOW_PEACH_BLOCK.asItem());
-        });
     }
 
 

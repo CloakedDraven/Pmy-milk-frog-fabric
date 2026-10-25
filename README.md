@@ -25,7 +25,7 @@ This mod introduces Milk Snails, a new creature, along with more items, such as 
 - Not tested with other mods yet. Report conflicts via Issues.
 
 ### Usage
-- Craft the Lollipop, Yellow Peach Block, Glass Jar, and Yellow Peach Jar.See the docs folder for the specific crafting method.
+- Craft the Lollipop, Yellow Peach Block, Glass Jar, Milk Note Block, and Yellow Peach Jar.See the docs folder for the specific crafting method.
 - You can get Yellow Peaches by defeating Milk Snails.
 - Use the Milk Snail Spawn Egg to spawn a Milk Snail.
 - Feed Lollipops on two adult Milk Snails to breed them.
@@ -47,7 +47,7 @@ This is my first Minecraft mod, developed with AI assistance. I also use AI to h
 ---
 ## 简体中文
 ### 简介
-本 Mod 添加了一种新生物——奶蜗，以及另外一些物品，比如棒棒糖和奶蜗生成蛋。你可以吃掉棒棒糖，也可以把它喂给奶蜗。奶蜗吃掉棒棒糖后会大笑。未来我会加入像奶蛙一类的生物和其他有意思的内容。
+本 Mod 添加了一种新生物——奶蜗，以及另外一些物品，比如棒棒糖、奶蜗生成蛋、奶音盒。你可以吃掉棒棒糖，也可以把它喂给奶蜗。奶蜗吃掉棒棒糖后会大笑。未来我会加入像奶蛙一类的生物和其他有意思的内容。
 
 ### 前置要求
 - **加载器** : Fabric

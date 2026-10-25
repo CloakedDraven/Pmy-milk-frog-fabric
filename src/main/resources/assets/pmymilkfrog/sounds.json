@@ -4,5 +4,10 @@
     "sounds": [
       "pmymilkfrog:short_crazy_laughter"
     ]
+  },
+  "long_crazy_laughter": {
+    "sounds": [
+      "pmymilkfrog:long_crazy_laughter"
+    ]
   }
 }

@@ -20,8 +20,9 @@ public class PmySMilkfrog implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModItems.initialize();
+		ModCreativeTabs.registerCreativeTabEntries();
 		ModBlocks.initialize();
+		ModItems.Initialize();
 		ModEntityTypes.registerModEntityTypes();
 		ModEntityTypes.registerAttributes();
 		ModEntitySpawns.registerSpawns();

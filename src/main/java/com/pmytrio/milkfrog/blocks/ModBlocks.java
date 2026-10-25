@@ -15,6 +15,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import java.util.function.Function;
 
 public class ModBlocks {
+
+    /** ----------Blocks---------- **/
     public static final Block YELLOW_PEACH_BLOCK = register(
             "yellow_peach_block",
             Block::new,
@@ -23,9 +25,23 @@ public class ModBlocks {
             true
     );
 
+    public static final Block MILK_NOTE_BLOCK = register(
+            "milk_note_block",
+            MilkNoteBlock::new,
+            BlockBehaviour.Properties.of().sound(SoundType.WOOD)
+                    .strength(2.5f),
+            true
+    );
+
+
+
+    /** ----------Initialize---------- **/
     public static void initialize() {
     }
 
+
+
+    /** ----------Register---------- **/
     private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties, boolean shouldRegisterItem) {
 
         // Create a registry key for the block
