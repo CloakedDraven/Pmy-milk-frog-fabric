@@ -9,5 +9,10 @@
     "sounds": [
       "pmymilkfrog:long_crazy_laughter"
     ]
+  },
+  "laughter_note": {
+    "sounds": [
+      "pmymilkfrog:laughter_note"
+    ]
   }
 }

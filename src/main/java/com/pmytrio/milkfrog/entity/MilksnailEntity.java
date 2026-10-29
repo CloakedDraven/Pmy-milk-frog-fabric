@@ -5,10 +5,13 @@ import com.geckolib.animatable.instance.AnimatableInstanceCache;
 import com.geckolib.animatable.manager.AnimatableManager;
 import com.geckolib.animation.AnimationController;
 import com.geckolib.animation.RawAnimation;
-import com.geckolib.animation.object.PlayState;
+import com.geckolib.animation.object.LoopType;
 import com.geckolib.util.GeckoLibUtil;
 import com.pmytrio.milkfrog.sound.CustomSounds;
 import com.pmytrio.milkfrog.item.ModItems;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -41,8 +44,10 @@ public class MilksnailEntity extends Animal implements GeoEntity {
     //----------Geckolib Animation Cathe----------
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     //----------Laughter Control Parameters----------
+    // Synced so the client knows when to play the "laugh" animation.
+    private static final EntityDataAccessor<Boolean> DATA_LAUGHING =
+            SynchedEntityData.defineId(MilksnailEntity.class, EntityDataSerializers.BOOLEAN);
     private int laughTicks = 0;
-    private boolean isLaughing = false;
 
 
     /**
@@ -50,6 +55,12 @@ public class MilksnailEntity extends Animal implements GeoEntity {
      **/
     public MilksnailEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_LAUGHING, false);
     }
 
 
@@ -75,27 +86,48 @@ public class MilksnailEntity extends Animal implements GeoEntity {
         return this.geoCache;
     }
 
-    // Registers the animation controller: play "walk" while moving, "idle" otherwise.
+    // Retract into the shell and hold that pose for as long as the snail stays badly hurt.
+    private static final RawAnimation RETRACT = RawAnimation.begin().thenPlayAndHold("intoshell");
+    // Climb back out of the shell once health is restored. The chained "idle" stage marks the end
+    // of the transition, so the controller knows when normal behaviour may resume.
+    private static final RawAnimation EMERGE = RawAnimation.begin()
+            .then("outofshell", LoopType.PLAY_ONCE)
+            .thenLoop("idle");
+
+    // Registers the animations. The names used here must match the keys inside
+    // milksnail.animation.json exactly - GeckoLib 5 compares them verbatim, so the file keeps
+    // plain names ("idle", "walk", "intoshell", "outofshell", ...) instead of Blockbench's
+    // "animation." prefix.
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 
-        controllers.add(new AnimationController<>(state -> {
-            if ( this.getHealth() < 2.0F) {
-                return state.setAndContinue(RawAnimation.begin().thenPlayAndHold("intoshell"));
+        controllers.add(new AnimationController<MilksnailEntity>("milksnail", 3, state -> {
+
+            // Badly hurt: retract into the shell and hold that pose (see LowHealthFreezeGoal).
+            if (this.getHealth() < 2.0F) {
+                return state.setAndContinue(RETRACT);
             }
-            return PlayState.STOP;
-        }));
 
-        controllers.add(new AnimationController<>(state -> {
+            // Health is back to 2 or more: climb out of the shell before doing anything else.
+            // RETRACT is still the current animation while the snail sits in its shell, and EMERGE
+            // stays active until its chained "idle" stage is reached (i.e. until "outofshell" ended).
+            if (state.isCurrentAnimation(RETRACT)
+                    || (state.isCurrentAnimation(EMERGE) && !state.isCurrentAnimationStage("idle"))) {
+                return state.setAndContinue(EMERGE);
+            }
 
+            // Just fed a lollipop: laugh for a bit.
+            if (this.isLaughing()) {
+                return state.setAndContinue(RawAnimation.begin().thenLoop("laugh"));
+            }
+
+            // Walk while moving, idle otherwise.
             if (state.isMoving()) {
                 return state.setAndContinue(RawAnimation.begin().thenLoop("walk"));
             }
+
             return state.setAndContinue(RawAnimation.begin().thenLoop("idle"));
         }));
-
-
-
     }
 
 
@@ -123,7 +155,7 @@ public class MilksnailEntity extends Animal implements GeoEntity {
     public void tick() {
         super.tick();
 
-        if (!this.level().isClientSide() && this.isLaughing) {
+        if (!this.level().isClientSide() && this.isLaughing()) {
             this.getNavigation().stop();
 
             if (--this.laughTicks <= 0) {
@@ -137,7 +169,7 @@ public class MilksnailEntity extends Animal implements GeoEntity {
     /** ---------Laugh state---------- **/
 
     public void startLaughing() {
-        this.isLaughing = true;
+        this.entityData.set(DATA_LAUGHING, true);
         this.laughTicks = LAUGH_DURATION;
 
 
@@ -146,12 +178,12 @@ public class MilksnailEntity extends Animal implements GeoEntity {
     }
 
     public void stopLaughing() {
-        this.isLaughing = false;
+        this.entityData.set(DATA_LAUGHING, false);
         this.laughTicks = 0;
     }
 
     public boolean isLaughing() {
-        return this.isLaughing;
+        return this.entityData.get(DATA_LAUGHING);
     }
 
 

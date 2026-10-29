@@ -12,6 +12,7 @@ public class CustomSounds {
 
     public static final SoundEvent SHORT_CRAZY_LAUGHTER = registerSound("short_crazy_laughter");
     public static final SoundEvent LONG_CRAZY_LAUGHTER = registerSound("long_crazy_laughter");
+    public static final SoundEvent LAUGHTER_NOTE = registerSound("laughter_note");
 
     private static SoundEvent registerSound(String id) {
         Identifier identifier = PmySMilkfrog.id(id);

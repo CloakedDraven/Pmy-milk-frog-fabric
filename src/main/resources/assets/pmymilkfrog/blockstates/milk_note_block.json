@@ -1,7 +1,6 @@
 {
   "variants": {
-    "": {
-      "model": "pmymilkfrog:block/milk_note_block"
-    }
+    "powered=false": { "model": "pmymilkfrog:block/milk_note_block" },
+    "powered=true": { "model": "pmymilkfrog:block/laughing_milk_note_block" }
   }
 }
