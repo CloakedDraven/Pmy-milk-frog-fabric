@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "STS",
+    "SSS"
+  ],
+  "key": {
+    "S": "pmymilkfrog:yellow_peach",
+    "T": "minecraft:redstone"
+  },
+  "result": {
+    "id": "pmymilkfrog:milk_note_block",
+    "count": 1
+  }
+}

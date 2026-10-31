@@ -29,7 +29,7 @@ This mod introduces Milk Snails, a new creature, along with more items, such as 
 - You can get Yellow Peaches by defeating Milk Snails.
 - Use the Milk Snail Spawn Egg to spawn a Milk Snail.
 - Feed Lollipops on two adult Milk Snails to breed them.
-- Milk Snail animations/textures are currently buggy.
+- Play music by using Milk Note Block. Its usage is like Note Block.
 
 ### About
 This is my first Minecraft mod, developed with AI assistance. I also use AI to help me learn how to build projects. The mod is currently in **Alpha**, so it may have bugs and unfinished features. If anyone has advice on how to improve the mod, I would really appreciate it.
@@ -67,7 +67,7 @@ This is my first Minecraft mod, developed with AI assistance. I also use AI to h
 - 你可以击败奶蜗来获得黄桃。
 - 使用奶蜗生成蛋生成奶蜗。
 - 奶蜗可以使用棒棒糖让他们繁殖。
-- 奶蜗的动画和贴图目前存在 bug。
+- 使用奶音盒演奏音乐，使用方式和原版音符盒差不多。
 
 ### 关于
 这是我的第一个 Minecraft Mod，在 AI 辅助下完成，我也借助 AI 学习如何搭建项目。目前 Mod 处于 **Alpha** 阶段，可能存在 bug 和未完成的功能。如果有人愿意指导我如何改进，我会非常感激。

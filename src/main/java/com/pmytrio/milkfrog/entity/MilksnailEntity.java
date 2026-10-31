@@ -121,6 +121,9 @@ public class MilksnailEntity extends Animal implements GeoEntity {
                 return state.setAndContinue(RawAnimation.begin().thenLoop("laugh"));
             }
 
+            // Flee when suffer damage.
+
+
             // Walk while moving, idle otherwise.
             if (state.isMoving()) {
                 return state.setAndContinue(RawAnimation.begin().thenLoop("walk"));

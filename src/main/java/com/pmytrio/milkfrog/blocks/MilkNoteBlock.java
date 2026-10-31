@@ -1,84 +1,102 @@
 package com.pmytrio.milkfrog.blocks;
 
-import com.pmytrio.milkfrog.sound.CustomSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jspecify.annotations.Nullable;
+
+import static com.pmytrio.milkfrog.sound.CustomSounds.LAUGHTER_NOTE;
 
 public class MilkNoteBlock extends Block {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-    // 直接用原版的 NOTE 属性（0~24）
     public static final IntegerProperty NOTE = BlockStateProperties.NOTE;
 
-    public MilkNoteBlock(Properties properties) {
+    public MilkNoteBlock(final BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(POWERED, false).setValue(NOTE, 0));
+        this.registerDefaultState(
+                this.stateDefinition.any()
+                        .setValue(NOTE, 0)
+                        .setValue(POWERED, false)
+        );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(POWERED, NOTE);
+        builder.add(NOTE, POWERED);
     }
 
-    // 原版同款音高公式
-    public static float getPitchFromNote(int note) {
-        return (float) Math.pow(2.0F, (note - 12) / 12.0F);
-    }
-
-    // ================= 红石信号触发 =================
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
-        if (!level.isClientSide()) {
-            boolean hasSignal = level.hasNeighborSignal(pos);
-            if (hasSignal != state.getValue(POWERED)) {
-                if (hasSignal) {
-                    // 触发方块事件（网络同步）
-                    level.blockEvent(pos, this, 0, 0);
-                }
-                level.setBlock(pos, state.setValue(POWERED, hasSignal), 3);
+    @Override
+    protected void neighborChanged(
+            final BlockState state, final Level level, final BlockPos pos, final Block block, final @Nullable Orientation orientation, final boolean movedByPiston
+    ) {
+        boolean signal = level.hasNeighborSignal(pos);
+        if (signal != state.getValue(POWERED)) {
+            if (signal) {
+                this.playMilkNote(null, state, level, pos);
             }
+
+            level.setBlock(pos, state.setValue(POWERED, signal), 3);
         }
     }
 
-    // ================= 右键点击 =================
+    private void playMilkNote(final @Nullable Entity source, final BlockState state, final Level level, final BlockPos pos) {
+        if (level.getBlockState(pos.above()).isAir()) {
+            level.blockEvent(pos, this, 0, 0);
+            level.gameEvent(source, GameEvent.NOTE_BLOCK_PLAY, pos);
+        }
+    }
+
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, final Level level, final BlockPos pos, final Player player, final BlockHitResult hitResult) {
         if (!level.isClientSide()) {
-            // 原版同款优雅写法：0~24 循环
             state = state.cycle(NOTE);
             level.setBlock(pos, state, 3);
-            level.blockEvent(pos, this, 0, 0);
+            this.playMilkNote(player, state, level, pos);
+            player.awardStat(Stats.TUNE_NOTEBLOCK);
         }
+
         return InteractionResult.SUCCESS;
     }
 
-    // ================= 处理方块事件（真正发声的地方） =================
+    protected void attack(final BlockState state, final Level level, final BlockPos pos, final Player player) {
+        if (!level.isClientSide()) {
+            this.playMilkNote(player, state, level, pos);
+            player.awardStat(Stats.PLAY_NOTEBLOCK);
+        }
+    }
+
+    public static float getPitchFromNote(final int twoOctaveRangeNote) {
+        return (float)Math.pow(2.0, (twoOctaveRangeNote - 12) / 12.0);
+    }
+
     @Override
-    protected boolean triggerEvent(BlockState state, Level level, BlockPos pos, int b0, int b1) {
-        // 获取当前音高
+    protected boolean triggerEvent(final BlockState state, final Level level, final BlockPos pos,
+                                   final int b0, final int b1) {
         int note = state.getValue(NOTE);
         float pitch = getPitchFromNote(note);
 
-        // 1. 添加原版的音符粒子效果（让画面好看一点）
-        level.addParticle(ParticleTypes.NOTE,
-                (double) pos.getX() + 0.5D,
-                (double) pos.getY() + 1.2D,
-                (double) pos.getZ() + 0.5D,
-                (double) note / 24.0D, 0.0D, 0.0D);
+        level.addParticle(ParticleTypes.NOTE, pos.getX()+0.5, pos.getY()+1.2, pos.getZ()+0.5,
+                note/24.0, 0.0, 0.0);
 
-        // 2. 播放你的自定义声音
-        // 注意：原版用的是 SoundSource.RECORDS，这能让声音传得很远。你也可以用 BLOCKS
-        level.playSound(null, pos, CustomSounds.LONG_CRAZY_LAUGHTER, SoundSource.BLOCKS, 1.0F, pitch);
-
+        level.playSeededSound(null, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5,
+                Holder.direct(LAUGHTER_NOTE), SoundSource.RECORDS,
+                3.0F, pitch, level.getRandom().nextLong());
         return true;
     }
 }
