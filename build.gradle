@@ -14,6 +14,14 @@ repositories {
 		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
 	}
 
+	// Jade is distributed through Modrinth's maven repo (Jade has no first-party maven).
+	maven {
+		name = 'Modrinth'
+		url 'https://api.modrinth.com/maven'
+		content {
+			includeGroup 'maven.modrinth'
+		}
+	}
 }
 
 loom {
@@ -43,6 +51,10 @@ dependencies {
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
 	implementation "com.geckolib:geckolib-fabric-26.1.2:5.5.1"
+
+	// Jade API: tooltip/HUD info providers. Loom 1.18 remaps mod dependencies
+	// automatically, so a plain `implementation` is enough (same as fabric-api above).
+	implementation "maven.modrinth:jade:${project.jade_version}"
 
 }
 

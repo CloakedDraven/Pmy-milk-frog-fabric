@@ -7,5 +7,7 @@
   "entity.pmymilkfrog.milksnail": "Milk Snail",
   "subtitles.pmymilkfrog.short_crazy_laughter": "Short Crazy Laughter",
   "block.pmymilkfrog.yellow_peach_block": "Yellow Peach Block",
-  "block.pmymilkfrog.milk_note_block": "Milk Note Block"
+  "block.pmymilkfrog.milk_note_block": "Milk Note Block",
+  "config.jade.plugin_pmymilkfrog.milk_note_block": "Milk Note Block Pitch",
+  "config.jade.plugin_pmymilkfrog.milk_note_block_desc": "Shows the current pitch of the milk note block."
 }

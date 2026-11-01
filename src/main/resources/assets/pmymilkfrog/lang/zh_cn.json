@@ -7,5 +7,7 @@
   "entity.pmymilkfrog.milksnail": "奶蜗",
   "subtitles.pmymilkfrog.short_crazy_laughter": "短促魔性笑声",
   "block.pmymilkfrog.yellow_peach_block": "黄桃块",
-  "block.pmymilkfrog.milk_note_block": "奶音盒"
+  "block.pmymilkfrog.milk_note_block": "奶音盒",
+  "config.jade.plugin_pmymilkfrog.milk_note_block": "奶音盒音调",
+  "config.jade.plugin_pmymilkfrog.milk_note_block_desc": "显示奶音盒当前的音调。"
 }

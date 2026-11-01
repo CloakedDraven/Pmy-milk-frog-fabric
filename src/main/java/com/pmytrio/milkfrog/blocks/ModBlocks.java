@@ -29,7 +29,8 @@ public class ModBlocks {
             "milk_note_block",
             MilkNoteBlock::new,
             BlockBehaviour.Properties.of().sound(SoundType.WOOD)
-                    .strength(2.5f),
+                    .strength(2.5f)
+                    .isRedstoneConductor((state, world, pos) -> true),
             true
     );
 
