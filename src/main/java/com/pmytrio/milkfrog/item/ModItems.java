@@ -1,18 +1,17 @@
 package com.pmytrio.milkfrog.item;
 
 import com.pmytrio.milkfrog.PmySMilkfrog;
-import com.pmytrio.milkfrog.blocks.ModBlocks;
 import com.pmytrio.milkfrog.entity.ModEntityTypes;
-import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.component.Consumables;
 
 
 import java.util.function.Function;
@@ -38,6 +37,65 @@ public class ModItems {
                         .alwaysEdible()
                         .build()
             )
+    );
+
+    public static final Item CHOCOLATE_LOLLIPOP = register(
+            "chocolate_lollipop",
+            Item::new,
+            new Item.Properties().food(
+                    new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationModifier(0.8f)
+                            .alwaysEdible()
+                            .build()
+            )
+    );
+
+    public static final Item CHORUS_LOLLIPOP = register(
+            "chorus_lollipop",
+            Item::new,
+            new Item.Properties().food(
+                    new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationModifier(0.2f)
+                            .alwaysEdible()
+                            .build()
+            )
+                    .component(DataComponents.CONSUMABLE, Consumables.CHORUS_FRUIT)
+    );
+
+    public static final Item HONEY_LOLLIPOP = register(
+            "honey_lollipop",
+            Item::new,
+            new Item.Properties().food(
+                    new FoodProperties.Builder()
+                            .nutrition(6)
+                            .saturationModifier(0.4f)
+                            .alwaysEdible()
+                            .build()
+            )
+    );
+
+    public static final Item ICE_LOLLIPOP = register(
+            "ice_lollipop",
+            Item::new,
+            new Item.Properties().food(
+                    MobFoodEffect.ICE_LOLLIPOP_COMPONENT,
+                    MobFoodEffect.ICE_LOLLIPOP_CONSUMABLE_COMPONENT
+            )
+    );
+
+    public static final Item POISONOUS_LOLLIPOP = register(
+            "poisonous_lollipop",
+            Item::new,
+            new Item.Properties().food(
+                    new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationModifier(0.2f)
+                            .alwaysEdible()
+                            .build()
+            )
+                    .component(DataComponents.CONSUMABLE, Consumables.SPIDER_EYE)
     );
 
     public static final Item YELLOW_PEACH = register(

@@ -25,7 +25,7 @@ This mod introduces Milk Snails, a new creature, along with more items, such as 
 - Not tested with other mods yet. Report conflicts via Issues.
 
 ### Usage
-- Craft the Lollipop, Yellow Peach Block, Glass Jar, Milk Note Block, and Yellow Peach Jar.See the docs folder for the specific crafting method.
+- Craft the various Lollipops, Yellow Peach Block, Glass Jar, Milk Note Block, and Yellow Peach Jar.See the docs folder for the specific crafting method.
 - You can get Yellow Peaches by defeating Milk Snails.
 - Use the Milk Snail Spawn Egg to spawn a Milk Snail.
 - Feed Lollipops on two adult Milk Snails to breed them.
@@ -35,13 +35,15 @@ This mod introduces Milk Snails, a new creature, along with more items, such as 
 This is my first Minecraft mod, developed with AI assistance. I also use AI to help me learn how to build projects. The mod is currently in **Alpha**, so it may have bugs and unfinished features. If anyone has advice on how to improve the mod, I would really appreciate it.
 
 ### Credits
-- **Author** : CloakedDraven
-- **Co-Authors** : Penguin Lts, Mouse Csq, Reisen
+- **Author** : CloakedDraven(Code, Some of the textures, and sounds)
+- **Co-Authors** : Penguin Lts( Models and Animations), Mouse Csq( Some of the textures), Reisen. [^About]
 - **License** : MIT
 
 ### Links
 - [GitHub Repository](https://github.com/CloakedDraven/Pmy-milk-frog-fabric)
 - [GitHub Issues](https://github.com/CloakedDraven/Pmy-milk-frog-fabric/issues)
+
+[^About]: All the releases are committed just under my account currently because my friends don't have accounts yet. From now on (version 0.6.0-alpha.1) I will note in the commit message who completed the work.
 
 
 ---
@@ -63,7 +65,7 @@ This is my first Minecraft mod, developed with AI assistance. I also use AI to h
 - 尚未与其他 Mod 进行兼容性测试。如遇冲突请提交 Issue。
 
 ### 使用
-- 可以用工作台合成棒棒糖、黄桃块，玻璃罐，黄桃罐头。具体合成方法看docs文件夹。
+- 可以用工作台合成多种多样的棒棒糖、黄桃块，玻璃罐，黄桃罐头。具体合成方法看docs文件夹。
 - 你可以击败奶蜗来获得黄桃。
 - 使用奶蜗生成蛋生成奶蜗。
 - 奶蜗可以使用棒棒糖让他们繁殖。
@@ -73,10 +75,12 @@ This is my first Minecraft mod, developed with AI assistance. I also use AI to h
 这是我的第一个 Minecraft Mod，在 AI 辅助下完成，我也借助 AI 学习如何搭建项目。目前 Mod 处于 **Alpha** 阶段，可能存在 bug 和未完成的功能。如果有人愿意指导我如何改进，我会非常感激。
 
 ### 鸣谢
-- **作者** : CloakedDraven
-- **共同作者** : Penguin Lts、Mouse Csq、Reisen
+- **作者** : CloakedDraven（代码部分、部分材质、音效）
+- **共同作者** : Penguin Lts（模型和动画）、Mouse Csq（部分材质）、Reisen. [^关于]
 - **许可证** : MIT
 
 ### 相关链接
 - [GitHub 仓库](https://github.com/CloakedDraven/Pmy-milk-frog-fabric)
 - [问题反馈](https://github.com/CloakedDraven/Pmy-milk-frog-fabric/issues)
+  
+[^关于]: 目前所有发布版本都只是用我的账号提交的，因为我的朋友们还没有账号。从今以后（版本 0.6.0-alpha.1），我会在提交信息中注明是谁完成了这项工作。

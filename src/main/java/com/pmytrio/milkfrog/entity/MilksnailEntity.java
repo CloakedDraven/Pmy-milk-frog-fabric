@@ -144,7 +144,7 @@ public class MilksnailEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(1, new LowHealthFreezeGoal(this));//Freeze when health low
         this.goalSelector.addGoal(2, new PanicGoal(this, 1.25D));// panic/flee
         this.goalSelector.addGoal(3, new BreedGoal(this, 0.5D));// breed
-        this.goalSelector.addGoal(4, new TemptGoal(this, 0.5, Ingredient.of(ModItems.LOLLIPOP), false));// tempted by lollipop
+        this.goalSelector.addGoal(4, new TemptGoal(this, 0.5, Ingredient.of(ModItems.LOLLIPOP,ModItems.CHOCOLATE_LOLLIPOP,ModItems.CHORUS_LOLLIPOP,ModItems.HONEY_LOLLIPOP,ModItems.ICE_LOLLIPOP,ModItems.POISONOUS_LOLLIPOP), false));// tempted by lollipop
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 0.5));// random strolling
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 4));// look at nearby players
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));// random looking around

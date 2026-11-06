@@ -11,9 +11,24 @@ public class ModCreativeTabs {
 
     /** ----------Items---------- **/
     /* ----------Food and Drinks---------- **/
-    //lollipop
+    //lollipops
     CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)
             .register((creativeTab) -> creativeTab.accept(ModItems.LOLLIPOP));
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)
+                .register((creativeTab) -> creativeTab.accept(ModItems.CHOCOLATE_LOLLIPOP));
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)
+                .register((creativeTab) -> creativeTab.accept(ModItems.CHORUS_LOLLIPOP));
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)
+                .register((creativeTab) -> creativeTab.accept(ModItems.HONEY_LOLLIPOP));
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)
+                .register((creativeTab) -> creativeTab.accept(ModItems.ICE_LOLLIPOP));
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)
+                .register((creativeTab) -> creativeTab.accept(ModItems.POISONOUS_LOLLIPOP));
 
     //yellow_peach
     CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS)

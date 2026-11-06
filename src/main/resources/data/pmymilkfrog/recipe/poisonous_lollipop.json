@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "US ",
+    "T  "
+  ],
+  "key": {
+    "S": "minecraft:sugar",
+    "T": "minecraft:stick",
+    "U":["minecraft:poisonous_potato","minecraft:spider_eye","minecraft:pufferfish"]
+  },
+  "result": {
+    "id": "pmymilkfrog:poisonous_lollipop",
+    "count": 1
+  }
+}

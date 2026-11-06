@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "US ",
+    "T  "
+  ],
+  "key": {
+    "S": "minecraft:sugar",
+    "T": "minecraft:stick",
+    "U": "minecraft:ice"
+  },
+  "result": {
+    "id": "pmymilkfrog:ice_lollipop",
+    "count": 1
+  }
+}
