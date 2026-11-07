@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS ",
+    "T  "
+  ],
+  "key": {
+    "S": "minecraft:sugar",
+    "T": "minecraft:stick"
+  },
+  "result": {
+    "id": "pmymilkfrog:super_sweet_lollipop",
+    "count": 1
+  }
+}

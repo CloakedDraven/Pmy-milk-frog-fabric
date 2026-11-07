@@ -1,4 +1,4 @@
-package com.pmytrio.milkfrog.entity;
+package com.pmytrio.milkfrog.entity.EntityGoals;
 
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;

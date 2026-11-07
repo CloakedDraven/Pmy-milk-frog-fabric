@@ -10,10 +10,12 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.Consumables;
 
 
+import java.util.Set;
 import java.util.function.Function;
 
 
@@ -98,6 +100,49 @@ public class ModItems {
                     .component(DataComponents.CONSUMABLE, Consumables.SPIDER_EYE)
     );
 
+    public static final Item GLISTERING_LOLLIPOP = register(
+            "glistering_lollipop",
+            Item::new,
+            new Item.Properties().food(
+                    MobFoodEffect.GLISTERING_LOLLIPOP_COMPONENT,
+                    MobFoodEffect.GLISTERING_LOLLIPOP_CONSUMABLE_COMPONENT
+            )
+    );
+
+    public static final Item GOLDEN_LOLLIPOP = register(
+            "golden_lollipop",
+            Item::new,
+            new Item.Properties().food(
+                            new FoodProperties.Builder()
+                                    .nutrition(4)
+                                    .saturationModifier(0.7f)
+                                    .alwaysEdible()
+                                    .build()
+                    )
+                    .component(DataComponents.CONSUMABLE, Consumables.GOLDEN_APPLE)
+    );
+
+    public static final Item STRANGE_LOLLIPOP = register(
+            "strange_lollipop",
+            Item::new,
+            new Item.Properties().food(
+                    MobFoodEffect.STRANGE_LOLLIPOP_COMPONENT,
+                    MobFoodEffect.STRANGE_LOLLIPOP_CONSUMABLE_COMPONENT
+            )
+    );
+
+    public static final Item SUPER_SWEET_LOLLIPOP = register(
+            "super_sweet_lollipop",
+            Item::new,
+            new Item.Properties().food(
+                    new FoodProperties.Builder()
+                            .nutrition(4)
+                            .saturationModifier(0.4f)
+                            .alwaysEdible()
+                            .build()
+            )
+    );
+
     public static final Item YELLOW_PEACH = register(
             "yellow_peach",
             Item::new,
@@ -152,4 +197,15 @@ public class ModItems {
         return item;
     }
 
+
+
+    /** ---------Sets---------- **/
+    public static final Set<Item> LOLLIPOPS = Set.of(
+            LOLLIPOP, CHOCOLATE_LOLLIPOP, CHORUS_LOLLIPOP, HONEY_LOLLIPOP, ICE_LOLLIPOP,
+            POISONOUS_LOLLIPOP, GLISTERING_LOLLIPOP, GOLDEN_LOLLIPOP, STRANGE_LOLLIPOP, SUPER_SWEET_LOLLIPOP
+    );
+
+    public static boolean isLollipop(ItemStack stack) {
+        return !stack.isEmpty() && LOLLIPOPS.contains(stack.getItem());
+    }
 }

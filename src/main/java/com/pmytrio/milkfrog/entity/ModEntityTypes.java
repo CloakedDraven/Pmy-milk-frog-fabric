@@ -1,6 +1,7 @@
 package com.pmytrio.milkfrog.entity;
 
 import com.pmytrio.milkfrog.PmySMilkfrog;
+import com.pmytrio.milkfrog.entity.MilkCreatures.MilksnailEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
